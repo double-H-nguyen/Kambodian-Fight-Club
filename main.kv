@@ -1,2 +1,54 @@
-Label:
-    text: "Hello World"
+WindowManager:
+    MenuWindow:
+    TutorialWindow:
+    StartGameWindow:
+
+<MenuWindow>:
+    name: "menu"
+
+    GridLayout:
+        cols:1
+        Label:
+            text: "Hello World"
+
+        Button:
+            text: "Play"
+            on_release:
+                app.root.current = "start_game"
+
+        Button:
+            text: "How to Play"
+            on_release:
+                app.root.current = "tutorial"
+                root.manager.transition.direction = "left"       
+       
+
+<TutorialWindow>:
+    name: "tutorial"
+
+    GridLayout:
+        cols:1
+        Label:
+            text: "Tutorial Window"
+
+        Button:
+            text: "Back"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
+    
+<StartGameWindow>
+    name: "start_game"
+
+    GridLayout:
+        cols:1
+        Label:
+            text: "P1, select your number"
+
+        Button:
+            text: "Go back to menu"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
+    
+k
