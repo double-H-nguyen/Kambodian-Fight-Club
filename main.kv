@@ -2,6 +2,7 @@ WindowManager:
     MenuWindow:
     TutorialWindow:
     StartGameWindow:
+    P1GuessNumber:
 
 <MenuWindow>:
     name: "menu"
@@ -45,9 +46,37 @@ WindowManager:
         Label:
             text: "P1, select your number"
 
+        GridLayout:
+            cols:3
+            Button:
+                text: "0"
+                on_release:
+                    root.p1_btn_number(0)
+                    app.root.current = "p1_guess_number"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "5"
+                on_release:
+                    root.p1_btn_number(5)
+                    app.root.current = "p1_guess_number"
+                    root.manager.transition.direction = "left"
+
         Button:
             text: "Go back to menu"
             on_release:
                 app.root.current = "menu"
                 root.manager.transition.direction = "right"
     
+<P1GuessNumber>
+    name: "p1_guess_number"
+
+    GridLayout:
+        cols:1
+        Label:
+            text: "P1, guess the sum"
+
+        Button:
+            text: "Go back to menu"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
