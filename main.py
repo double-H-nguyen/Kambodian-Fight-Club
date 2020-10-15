@@ -34,6 +34,12 @@ class StartGameWindow(Screen):
 class P1GuessNumber(Screen):
   pass
 
+class GiveToP2(Screen):
+  pass
+
+class Player2Selector(Screen):
+  pass
+
 class WindowManager(ScreenManager):
   pass
 

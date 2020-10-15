@@ -3,6 +3,9 @@ WindowManager:
     TutorialWindow:
     StartGameWindow:
     P1GuessNumber:
+    GiveToP2:
+    Player2Selector:
+
 
 <MenuWindow>:
     name: "menu"
@@ -72,11 +75,59 @@ WindowManager:
 
     GridLayout:
         cols:1
+        
         Label:
             text: "P1, guess the sum"
+        Button:
+            text: "0"
+            on_release:
+                app.root.current = "give_to_p2"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "5"
+            on_release:
+                app.root.current = "give_to_p2"
+                root.manager.transition.direction ="left"
+
+        Button:
+            text: "10"
+            on_release:
+                app.root.current = "give_to_p2"
+                root.manager.transition.direction ="left"
 
         Button:
             text: "Go back to menu"
             on_release:
                 app.root.current = "menu"
                 root.manager.transition.direction = "right"
+
+<GiveToP2>
+    name: "give_to_p2"
+
+    GridLayout:
+        cols:1
+
+        Label: 
+            text: "Look Away, Give to P2"
+
+        Button: 
+            text: "Next"  
+            on_release:
+                app.root.current = "p2_select_number"
+                root.manager.transition.direction = "left"  
+
+<Player2Selector>
+    name: "p2_select_number"
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "P2, Select Number"
+        
+        Button:
+            text: "0"
+        
+        Button:
+            text: "5"
