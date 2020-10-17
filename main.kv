@@ -1,13 +1,12 @@
 WindowManager:
     MenuWindow:
     TutorialWindow:
-    StartGameWindow:
     P1GuessNumber:
     GiveToP2:
     Player2Selector:
+    P1GuessSum:
 
-
-<MenuWindow>:
+<MenuWindow>
     name: "menu"
 
     GridLayout:
@@ -18,16 +17,15 @@ WindowManager:
         Button:
             text: "Play"
             on_release:
-                app.root.current = "start_game"
+                app.root.current = "p1_guess_num"
 
         Button:
             text: "How to Play"
             on_release:
                 app.root.current = "tutorial"
-                root.manager.transition.direction = "left"       
-       
+                root.manager.transition.direction = "left"
 
-<TutorialWindow>:
+<TutorialWindow>
     name: "tutorial"
 
     GridLayout:
@@ -40,9 +38,9 @@ WindowManager:
             on_release:
                 app.root.current = "menu"
                 root.manager.transition.direction = "right"
-    
-<StartGameWindow>
-    name: "start_game"
+
+<P1GuessNumber>
+    name: "p1_guess_num"
 
     GridLayout:
         cols:1
@@ -54,14 +52,14 @@ WindowManager:
             Button:
                 text: "0"
                 on_release:
-                    root.p1_btn_number(0)
-                    app.root.current = "p1_guess_number"
+                    root.store_p1_num(0)
+                    app.root.current = "p1_guess_sum"
                     root.manager.transition.direction = "left"
             Button:
                 text: "5"
                 on_release:
-                    root.p1_btn_number(5)
-                    app.root.current = "p1_guess_number"
+                    root.store_p1_num(5)
+                    app.root.current = "p1_guess_sum"
                     root.manager.transition.direction = "left"
 
         Button:
@@ -70,8 +68,8 @@ WindowManager:
                 app.root.current = "menu"
                 root.manager.transition.direction = "right"
     
-<P1GuessNumber>
-    name: "p1_guess_number"
+<P1GuessSum>
+    name: "p1_guess_sum"
 
     GridLayout:
         cols:1
@@ -81,18 +79,21 @@ WindowManager:
         Button:
             text: "0"
             on_release:
+                root.store_p1_sum(0)
                 app.root.current = "give_to_p2"
                 root.manager.transition.direction = "left"
 
         Button:
             text: "5"
             on_release:
+                root.store_p1_sum(5)
                 app.root.current = "give_to_p2"
                 root.manager.transition.direction ="left"
 
         Button:
             text: "10"
             on_release:
+                root.store_p1_sum(10)
                 app.root.current = "give_to_p2"
                 root.manager.transition.direction ="left"
 
@@ -128,6 +129,10 @@ WindowManager:
         
         Button:
             text: "0"
-        
+            on_release:
+                root.store_p2_num(0)
+
         Button:
             text: "5"
+            on_release:
+                root.store_p2_num(5)

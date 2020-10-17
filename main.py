@@ -7,18 +7,23 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from game_logic import Game
 
-player1_selection = 999
+p1_selection = 999
+p1_sum_selection = 999
+
+p2_selection = 999
+p2_sum_selection = 999
+
 game = Game()
 
 
 class MenuWindow(Screen):
-    pass
+  pass
 
 class TutorialWindow(Screen):
-    pass
+  pass
 
 class WindowManager(ScreenManager):
-    pass
+  pass
 
 class MenuWindow(Screen):
   pass
@@ -26,28 +31,35 @@ class MenuWindow(Screen):
 class TutorialWindow(Screen):
   pass
 
-class StartGameWindow(Screen):
-  def p1_btn_number(self, p1_selection):
-    print(f"You pressed the {p1_selection} button (this function was called in main.py)")
-    global player1_selection 
-    player1_selection = p1_selection
-    print_p1_response()
-    game.start_game()
-
 class P1GuessNumber(Screen):
-  pass
+  def store_p1_num(self, p1_input):
+    global p1_selection 
+    p1_selection = p1_input
+    print_current_state()
+
+class P1GuessSum(Screen):
+  def store_p1_sum(self, p1_input):
+    global p1_sum_selection
+    p1_sum_selection = p1_input
+    print_current_state()
 
 class GiveToP2(Screen):
   pass
 
 class Player2Selector(Screen):
-  pass
+  def store_p2_num(self, p2_input):
+    global p2_selection
+    p2_selection = p2_input
+    print_current_state()
 
 class WindowManager(ScreenManager):
   pass
 
-def print_p1_response():
-  print(f"Player 1's response was {player1_selection}")
+def print_current_state():
+  print(f"P1 choice: {p1_selection}")
+  print(f"P1 sum: {p1_sum_selection}")
+  print(f"P2 choice: {p2_selection}")
+  print(f"P2 sum: {p2_sum_selection}")
 
 kv = Builder.load_file("main.kv") 
 class Main(App):
