@@ -5,8 +5,10 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from game_logic import Game
 
 player1_selection = 999
+game = Game()
 
 
 class MenuWindow(Screen):
@@ -30,6 +32,7 @@ class StartGameWindow(Screen):
     global player1_selection 
     player1_selection = p1_selection
     print_p1_response()
+    game.start_game()
 
 class P1GuessNumber(Screen):
   pass
