@@ -52,6 +52,12 @@ class Player2Selector(Screen):
     p2_selection = p2_input
     print_current_state()
 
+class ChosenNumber(Screen):
+  pass
+
+class P2GuessSum(Screen):
+  pass
+
 class WindowManager(ScreenManager):
   pass
 

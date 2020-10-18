@@ -5,6 +5,8 @@ WindowManager:
     GiveToP2:
     Player2Selector:
     P1GuessSum:
+    ChosenNumber:
+    P2GuessSum:
 
 <MenuWindow>
     name: "menu"
@@ -136,3 +138,33 @@ WindowManager:
             text: "5"
             on_release:
                 root.store_p2_num(5)
+
+<ChosenNumber>
+    name: "chosen_playernum"
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "Numbers that were Chosen"
+
+        Button:
+            text: "Next"
+
+<P2GuessSum>
+    name: "p2_guess_sum"
+
+    GridLayout:
+        cols:1
+    
+        Label:
+            text: "P2 Guess the Number"
+    
+        Button:
+            text: "0"
+
+        Button:
+            text: "5"
+    
+        Button:
+            text: "10"
