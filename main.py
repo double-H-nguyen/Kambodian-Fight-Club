@@ -5,25 +5,16 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from game_logic import Game
+# from game_logic import Game
+
+# Always load .kv file first
+Builder.load_file("main.kv")
 
 p1_selection = 999
 p1_sum_selection = 999
 
 p2_selection = 999
 p2_sum_selection = 999
-
-game = Game()
-
-
-class MenuWindow(Screen):
-  pass
-
-class TutorialWindow(Screen):
-  pass
-
-class WindowManager(ScreenManager):
-  pass
 
 class MenuWindow(Screen):
   pass
@@ -52,19 +43,24 @@ class Player2Selector(Screen):
     p2_selection = p2_input
     print_current_state()
 
-class WindowManager(ScreenManager):
-  pass
-
 def print_current_state():
   print(f"P1 choice: {p1_selection}")
   print(f"P1 sum: {p1_sum_selection}")
   print(f"P2 choice: {p2_selection}")
   print(f"P2 sum: {p2_sum_selection}")
 
-kv = Builder.load_file("main.kv") 
+# add screen and their names here
+sm = ScreenManager()
+sm.add_widget(MenuWindow(name='menu'))
+sm.add_widget(TutorialWindow(name='tutorial'))
+sm.add_widget(P1GuessNumber(name='p1_guess_num'))
+sm.add_widget(P1GuessSum(name='p1_guess_sum'))
+sm.add_widget(GiveToP2(name='give_to_p2'))
+sm.add_widget(Player2Selector(name='p2_select_number'))
+
 class Main(App):
   def build(self):
-    return kv
+    return sm
 
 if __name__ == "__main__":
   Main().run()
