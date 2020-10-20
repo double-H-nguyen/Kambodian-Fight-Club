@@ -117,8 +117,38 @@
             text: "0"
             on_release:
                 root.store_p2_num(0)
+                app.root.test_game_logic()
 
         Button:
             text: "5"
             on_release:
                 root.store_p2_num(5)
+                app.root.test_game_logic()
+
+<Player1Win>
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "Player 1 Wins"
+
+        Button:
+            text: "Play again"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
+
+<Player2Win>
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "Player 2 Wins"
+
+        Button:
+            text: "Play again"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
