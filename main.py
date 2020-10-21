@@ -5,6 +5,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import ObjectProperty
 
 #############################################
 # KV FILE(S)
@@ -52,7 +53,13 @@ class Player2Win(Screen):
   pass
 
 class ChosenNumber(Screen):
-  pass
+  chosen_number_label = ObjectProperty(None)
+  sum = ObjectProperty(None)
+  def on_enter(self, *args):
+    global p1_selection, p2_selection, p1_sum_selection
+    total = p1_selection + p2_selection
+    self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)}"
+    self.sum.text = f"The Sum is: {str(total)}"
 
 class P2GuessSum(Screen):
   pass
@@ -108,6 +115,8 @@ g.add_widget(GiveToP2(name='give_to_p2'))
 g.add_widget(Player2Selector(name='p2_select_number'))
 g.add_widget(Player1Win(name='player1_win'))
 g.add_widget(Player2Win(name='player2_win'))
+g.add_widget(ChosenNumber(name='chosen_number'))
+# g.current='chosen_number'
 
 
 #############################################

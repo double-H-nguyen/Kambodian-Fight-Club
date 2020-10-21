@@ -117,13 +117,15 @@
             text: "0"
             on_release:
                 app.root.store_p2_num(0)
-                app.root.test_game_logic()
+                app.root.current = "chosen_number"
+                # app.root.test_game_logic()
 
         Button:
             text: "5"
             on_release:
                 app.root.store_p2_num(5)
-                app.root.test_game_logic()
+                app.root.current = "chosen_number"
+                # app.root.test_game_logic()
 
 <Player1Win>
 
@@ -173,3 +175,23 @@
     
         Button:
             text: "10"
+
+<ChosenNumber>
+    chosen_number_label:chosen_number_label
+    sum: sum
+
+    GridLayout:
+        cols:1
+
+        Label:
+            id: chosen_number_label
+            text: "Numbers chosen: "
+        
+        Label:
+            id: sum
+            text:""
+
+        Button:
+            text: "Show who won"
+            on_release:
+                app.root.test_game_logic()
