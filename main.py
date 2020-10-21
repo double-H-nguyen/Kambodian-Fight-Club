@@ -5,26 +5,28 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from game_logic import Game
 
+#############################################
+# KV FILE(S)
+# Always load .kv file first
+#############################################
+Builder.load_file("main.kv")
+
+
+#############################################
+# GLOBAL VARIABLES
+#############################################
 p1_selection = 999
 p1_sum_selection = 999
 
 p2_selection = 999
 p2_sum_selection = 999
 
-game = Game()
 
-
-class MenuWindow(Screen):
-  pass
-
-class TutorialWindow(Screen):
-  pass
-
-class WindowManager(ScreenManager):
-  pass
-
+#############################################
+# ADD SCREEN CLASSES
+# add new screen/window classes here
+#############################################
 class MenuWindow(Screen):
   pass
 
@@ -32,25 +34,22 @@ class TutorialWindow(Screen):
   pass
 
 class P1GuessNumber(Screen):
-  def store_p1_num(self, p1_input):
-    global p1_selection 
-    p1_selection = p1_input
-    print_current_state()
+  pass
 
 class P1GuessSum(Screen):
-  def store_p1_sum(self, p1_input):
-    global p1_sum_selection
-    p1_sum_selection = p1_input
-    print_current_state()
+  pass
 
 class GiveToP2(Screen):
   pass
 
 class Player2Selector(Screen):
-  def store_p2_num(self, p2_input):
-    global p2_selection
-    p2_selection = p2_input
-    print_current_state()
+  pass
+
+class Player1Win(Screen):
+  pass
+
+class Player2Win(Screen):
+  pass
 
 class ChosenNumber(Screen):
   pass
@@ -58,19 +57,75 @@ class ChosenNumber(Screen):
 class P2GuessSum(Screen):
   pass
 
-class WindowManager(ScreenManager):
-  pass
+#############################################
+# GAME LOGIC (app.root class)
+#############################################
+class Game(ScreenManager):
+  def store_p1_num(self, p1_input):
+    global p1_selection 
+    p1_selection = p1_input
+    print_current_state()
 
-def print_current_state():
+  def store_p1_sum(self, p1_input):
+    global p1_sum_selection
+    p1_sum_selection = p1_input
+    print_current_state()
+
+  def store_p2_num(self, p2_input):
+    global p2_selection
+    p2_selection = p2_input
+    print_current_state()
+
+  def store_p2_sum(self, p2_input):
+    pass
+
+  def check_sum():
+    pass
+  
+  def check_if_p1_won():
+    pass
+
+  def check_if_p2_won():
+    pass
+
+  def test_game_logic(self):
+    if (p1_selection + p2_selection == p1_sum_selection):
+      self.current = 'player1_win'
+    else:
+      self.current = 'player2_win'
+
+
+#############################################
+# ADD SCREENS
+# add screens and their names here
+#############################################
+g = Game()
+g.add_widget(MenuWindow(name='menu'))
+g.add_widget(TutorialWindow(name='tutorial'))
+g.add_widget(P1GuessNumber(name='p1_guess_num'))
+g.add_widget(P1GuessSum(name='p1_guess_sum'))
+g.add_widget(GiveToP2(name='give_to_p2'))
+g.add_widget(Player2Selector(name='p2_select_number'))
+g.add_widget(Player1Win(name='player1_win'))
+g.add_widget(Player2Win(name='player2_win'))
+
+
+#############################################
+# HELPER METHODS
+#############################################
+def print_current_state(): # debugging only
   print(f"P1 choice: {p1_selection}")
   print(f"P1 sum: {p1_sum_selection}")
   print(f"P2 choice: {p2_selection}")
   print(f"P2 sum: {p2_sum_selection}")
 
-kv = Builder.load_file("main.kv") 
+
+#############################################
+# STANDARD CODE
+#############################################
 class Main(App):
   def build(self):
-    return kv
+    return g
 
 if __name__ == "__main__":
   Main().run()

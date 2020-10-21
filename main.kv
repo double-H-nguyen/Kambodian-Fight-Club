@@ -1,15 +1,4 @@
-WindowManager:
-    MenuWindow:
-    TutorialWindow:
-    P1GuessNumber:
-    GiveToP2:
-    Player2Selector:
-    P1GuessSum:
-    ChosenNumber:
-    P2GuessSum:
-
 <MenuWindow>
-    name: "menu"
 
     GridLayout:
         cols:1
@@ -28,7 +17,6 @@ WindowManager:
                 root.manager.transition.direction = "left"
 
 <TutorialWindow>
-    name: "tutorial"
 
     GridLayout:
         cols:1
@@ -42,7 +30,6 @@ WindowManager:
                 root.manager.transition.direction = "right"
 
 <P1GuessNumber>
-    name: "p1_guess_num"
 
     GridLayout:
         cols:1
@@ -54,13 +41,13 @@ WindowManager:
             Button:
                 text: "0"
                 on_release:
-                    root.store_p1_num(0)
+                    app.root.store_p1_num(0)
                     app.root.current = "p1_guess_sum"
                     root.manager.transition.direction = "left"
             Button:
                 text: "5"
                 on_release:
-                    root.store_p1_num(5)
+                    app.root.store_p1_num(5)
                     app.root.current = "p1_guess_sum"
                     root.manager.transition.direction = "left"
 
@@ -71,7 +58,6 @@ WindowManager:
                 root.manager.transition.direction = "right"
     
 <P1GuessSum>
-    name: "p1_guess_sum"
 
     GridLayout:
         cols:1
@@ -81,21 +67,21 @@ WindowManager:
         Button:
             text: "0"
             on_release:
-                root.store_p1_sum(0)
+                app.root.store_p1_sum(0)
                 app.root.current = "give_to_p2"
                 root.manager.transition.direction = "left"
 
         Button:
             text: "5"
             on_release:
-                root.store_p1_sum(5)
+                app.root.store_p1_sum(5)
                 app.root.current = "give_to_p2"
                 root.manager.transition.direction ="left"
 
         Button:
             text: "10"
             on_release:
-                root.store_p1_sum(10)
+                app.root.store_p1_sum(10)
                 app.root.current = "give_to_p2"
                 root.manager.transition.direction ="left"
 
@@ -106,7 +92,6 @@ WindowManager:
                 root.manager.transition.direction = "right"
 
 <GiveToP2>
-    name: "give_to_p2"
 
     GridLayout:
         cols:1
@@ -121,7 +106,6 @@ WindowManager:
                 root.manager.transition.direction = "left"  
 
 <Player2Selector>
-    name: "p2_select_number"
 
     GridLayout:
         cols:1
@@ -132,15 +116,16 @@ WindowManager:
         Button:
             text: "0"
             on_release:
-                root.store_p2_num(0)
+                app.root.store_p2_num(0)
+                app.root.test_game_logic()
 
         Button:
             text: "5"
             on_release:
-                root.store_p2_num(5)
+                app.root.store_p2_num(5)
+                app.root.test_game_logic()
 
-<ChosenNumber>
-    name: "chosen_playernum"
+<Player1Win>
 
     GridLayout:
         cols:1
@@ -150,6 +135,20 @@ WindowManager:
 
         Button:
             text: "Next"
+
+<Player2Win>
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "Player 2 Wins"
+
+        Button:
+            text: "Play again"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
 
 <P2GuessSum>
     name: "p2_guess_sum"
@@ -168,3 +167,10 @@ WindowManager:
     
         Button:
             text: "10"
+            text: "Player 1 Wins"
+
+        Button:
+            text: "Play again"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
