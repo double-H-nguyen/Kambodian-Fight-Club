@@ -131,10 +131,16 @@
         cols:1
 
         Label:
-            text: "Numbers that were Chosen"
+            text: "Player 1 Wins"
 
         Button:
             text: "Next"
+
+        Button:
+            text: "Play again"
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "right"
 
 <Player2Win>
 
@@ -167,10 +173,3 @@
     
         Button:
             text: "10"
-            text: "Player 1 Wins"
-
-        Button:
-            text: "Play again"
-            on_release:
-                app.root.current = "menu"
-                root.manager.transition.direction = "right"
