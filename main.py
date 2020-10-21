@@ -71,6 +71,18 @@ class Game(ScreenManager):
     p2_selection = p2_input
     print_current_state()
 
+  def store_p2_sum(self, p2_input):
+    pass
+
+  def check_sum():
+    pass
+  
+  def check_if_p1_won():
+    pass
+
+  def check_if_p2_won():
+    pass
+
   def test_game_logic(self):
     if (p1_selection + p2_selection == p1_sum_selection):
       self.current = 'player1_win'
