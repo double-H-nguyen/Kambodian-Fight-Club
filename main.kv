@@ -33,8 +33,14 @@ WindowManager:
     GridLayout:
         cols:1
         Label:
+<<<<<<< Updated upstream
             text: "Tutorial Window"
 
+=======
+            text: "To Play, Player 1 or Player 2 choses a number and one player guesses the total sum of both the number. Whoever has the guess right wins the game."
+            text_size: self.width, None
+            font_size: 20
+>>>>>>> Stashed changes
         Button:
             text: "Back"
             on_release:
@@ -158,13 +164,62 @@ WindowManager:
         cols:1
     
         Label:
-            text: "P2 Guess the Number"
+            text: "P2 Guess the Sum"
     
         Button:
             text: "0"
-
+            on_release:
+                app.root.store_p2_sum(0)
+                app.root.current = "give_to_p1"
+                root.manager.transition.direction = "left"
         Button:
             text: "5"
-    
+            on_release:
+                app.root.store_p2_sum(5)
+                app.root.current = "give_to_p1"
+                root.manager.transition.direction ="left"
+
         Button:
+<<<<<<< Updated upstream
             text: "10"
+=======
+            text: "10"
+            on_release:
+                app.root.store_p2_sum(10)
+                app.root.current = "give_to_p1"
+                root.manager.transition.direction ="left"
+
+<GiveToP1>
+
+    GridLayout:
+        cols:1
+
+        Label: 
+            text: "Look Away, Give to P1"
+
+        Button: 
+            text: "Next"  
+            on_release:
+                app.root.current = "p1_guess_num"
+                root.manager.transition.direction = "left"
+
+<ChosenNumber>
+    chosen_number_label:chosen_number_label
+    sum: sum
+
+    GridLayout:
+        cols:1
+
+        Label:
+            id: chosen_number_label
+            text: "Numbers chosen: "
+        
+        Label:
+            id: sum
+            text:""
+
+        Button:
+            text: "Show who won"
+            on_release:
+                app.root.test_game_logic()
+>>>>>>> Stashed changes
