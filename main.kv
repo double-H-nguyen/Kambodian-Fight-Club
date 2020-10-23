@@ -42,20 +42,30 @@
                 text: "0"
                 on_release:
                     app.root.store_p1_num(0)
-                    app.root.current = "p1_guess_sum"
                     root.manager.transition.direction = "left"
             Button:
                 text: "5"
                 on_release:
                     app.root.store_p1_num(5)
-                    app.root.current = "p1_guess_sum"
                     root.manager.transition.direction = "left"
 
+<Player2Selector>
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "P2, Select Number"
+        
         Button:
-            text: "Go back to menu"
+            text: "0"
             on_release:
-                app.root.current = "menu"
-                root.manager.transition.direction = "right"
+                app.root.store_p2_num(0)
+
+        Button:
+            text: "5"
+            on_release:
+                app.root.store_p2_num(5)
     
 <P1GuessSum>
 
@@ -68,28 +78,62 @@
             text: "0"
             on_release:
                 app.root.store_p1_sum(0)
-                app.root.current = "give_to_p2"
                 root.manager.transition.direction = "left"
 
         Button:
             text: "5"
             on_release:
                 app.root.store_p1_sum(5)
-                app.root.current = "give_to_p2"
                 root.manager.transition.direction ="left"
 
         Button:
             text: "10"
             on_release:
                 app.root.store_p1_sum(10)
-                app.root.current = "give_to_p2"
+                root.manager.transition.direction ="left"
+
+<P2GuessSum>
+
+    GridLayout:
+        cols:1
+    
+        Label:
+            text: "P2, guess the sum"
+    
+        Button:
+            text: "0"
+            on_release:
+                app.root.store_p2_sum(0)
+                app.root.current = "give_to_p1"
                 root.manager.transition.direction ="left"
 
         Button:
-            text: "Go back to menu"
+            text: "5"
             on_release:
-                app.root.current = "menu"
-                root.manager.transition.direction = "right"
+                app.root.store_p2_sum(5)
+                app.root.current = "give_to_p1"
+                root.manager.transition.direction ="left"
+    
+        Button:
+            text: "10"
+            on_release:
+                app.root.store_p2_sum(10)
+                app.root.current = "give_to_p1"
+                root.manager.transition.direction ="left"
+
+<GiveToP1>
+
+    GridLayout:
+        cols:1
+
+        Label: 
+            text: "Look Away, Give to P1"
+
+        Button: 
+            text: "Next"  
+            on_release:
+                app.root.current = "p1_guess_num"
+                root.manager.transition.direction = "left"  
 
 <GiveToP2>
 
@@ -105,27 +149,24 @@
                 app.root.current = "p2_select_number"
                 root.manager.transition.direction = "left"  
 
-<Player2Selector>
+<ChosenNumber>
+    chosen_number_label:chosen_number_label
+    sum: sum
 
     GridLayout:
         cols:1
 
         Label:
-            text: "P2, Select Number"
+            id: chosen_number_label
+            text: "Numbers chosen: "
         
-        Button:
-            text: "0"
-            on_release:
-                app.root.store_p2_num(0)
-                app.root.current = "chosen_number"
-                # app.root.test_game_logic()
+        Label:
+            id: sum
+            text:""
 
         Button:
-            text: "5"
+            text: "Next round"
             on_release:
-                app.root.store_p2_num(5)
-                app.root.current = "chosen_number"
-                # app.root.test_game_logic()
 
 <Player1Win>
 
@@ -134,9 +175,6 @@
 
         Label:
             text: "Player 1 Wins"
-
-        Button:
-            text: "Next"
 
         Button:
             text: "Play again"
@@ -157,41 +195,3 @@
             on_release:
                 app.root.current = "menu"
                 root.manager.transition.direction = "right"
-
-<P2GuessSum>
-    name: "p2_guess_sum"
-
-    GridLayout:
-        cols:1
-    
-        Label:
-            text: "P2 Guess the Number"
-    
-        Button:
-            text: "0"
-
-        Button:
-            text: "5"
-    
-        Button:
-            text: "10"
-
-<ChosenNumber>
-    chosen_number_label:chosen_number_label
-    sum: sum
-
-    GridLayout:
-        cols:1
-
-        Label:
-            id: chosen_number_label
-            text: "Numbers chosen: "
-        
-        Label:
-            id: sum
-            text:""
-
-        Button:
-            text: "Show who won"
-            on_release:
-                app.root.test_game_logic()
