@@ -34,25 +34,31 @@ class MenuWindow(Screen):
 class TutorialWindow(Screen):
   pass
 
-class P1GuessNumber(Screen):
+class P1Num1(Screen):
   pass
 
-class P1GuessSum(Screen):
+class P2Num1(Screen):
+  pass
+
+class P1Num2(Screen):
+  pass
+
+class P2Num2(Screen):
+  pass
+
+class P1Sum(Screen):
+  pass
+
+class P2Sum(Screen):
+  pass
+
+class GiveToP1(Screen):
   pass
 
 class GiveToP2(Screen):
   pass
 
-class Player2Selector(Screen):
-  pass
-
-class Player1Win(Screen):
-  pass
-
-class Player2Win(Screen):
-  pass
-
-class ChosenNumber(Screen):
+class DisplayResults1(Screen): # needs more game_logic to determine if p1 wins
   chosen_number_label = ObjectProperty(None)
   sum = ObjectProperty(None)
   def on_enter(self, *args):
@@ -61,7 +67,13 @@ class ChosenNumber(Screen):
     self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)}"
     self.sum.text = f"The Sum is: {str(total)}"
 
-class P2GuessSum(Screen):
+class DisplayResults2(Screen): # needs more game_logic to determine if p2 wins
+  pass
+
+class P1Win(Screen):
+  pass
+
+class P2Win(Screen):
   pass
 
 #############################################
@@ -86,20 +98,11 @@ class Game(ScreenManager):
   def store_p2_sum(self, p2_input):
     pass
 
-  def check_sum():
-    pass
-  
-  def check_if_p1_won():
-    pass
-
-  def check_if_p2_won():
-    pass
-
-  def test_game_logic(self):
+  def test_game_logic(self): # this logic may be moved to DisplayResults1
     if (p1_selection + p2_selection == p1_sum_selection):
-      self.current = 'player1_win'
+      self.current = 'p1_win'
     else:
-      self.current = 'player2_win'
+      self.current = 'p2_win'
 
 
 #############################################
@@ -109,14 +112,19 @@ class Game(ScreenManager):
 g = Game()
 g.add_widget(MenuWindow(name='menu'))
 g.add_widget(TutorialWindow(name='tutorial'))
-g.add_widget(P1GuessNumber(name='p1_guess_num'))
-g.add_widget(P1GuessSum(name='p1_guess_sum'))
+g.add_widget(P1Num1(name='p1_num_1'))
+g.add_widget(P2Num1(name='p2_num_1'))
+g.add_widget(P1Num2(name='p1_num_2'))
+g.add_widget(P2Num2(name='p2_num_2'))
+g.add_widget(P1Sum(name='p1_sum'))
+g.add_widget(P2Sum(name='p2_sum'))
+g.add_widget(GiveToP1(name='give_to_p1'))
 g.add_widget(GiveToP2(name='give_to_p2'))
-g.add_widget(Player2Selector(name='p2_select_number'))
-g.add_widget(Player1Win(name='player1_win'))
-g.add_widget(Player2Win(name='player2_win'))
-g.add_widget(ChosenNumber(name='chosen_number'))
-# g.current='chosen_number'
+g.add_widget(DisplayResults1(name='display_results_1'))
+g.add_widget(DisplayResults2(name='display_results_2'))
+g.add_widget(P1Win(name='p1_win'))
+g.add_widget(P2Win(name='p2_win'))
+#g.current='p2_guess_sum'
 
 
 #############################################
