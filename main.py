@@ -5,82 +5,89 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from game_logic import Game
+from kivy.properties import ObjectProperty
 
+#############################################
+# KV FILE(S)
+# Always load .kv file first
+#############################################
+Builder.load_file("main.kv")
+
+
+#############################################
+# GLOBAL VARIABLES
+#############################################
 p1_selection = 999
 p1_sum_selection = 999
 
 p2_selection = 999
 p2_sum_selection = 999
 
-game = Game()
 
-
+#############################################
+# ADD SCREEN CLASSES
+# add new screen/window classes here
+#############################################
 class MenuWindow(Screen):
   pass
 
 class TutorialWindow(Screen):
   pass
 
-class WindowManager(ScreenManager):
-  pass
-
-class MenuWindow(Screen):
-  pass
-
-class TutorialWindow(Screen):
-  pass
-
-<<<<<<< Updated upstream
 class P1GuessNumber(Screen):
-=======
-class GiveToP1(Screen):
   pass
-
-
-
-
-#############################################
-# GAME LOGIC (app.root class)
-#############################################
-class Game(ScreenManager):
->>>>>>> Stashed changes
-  def store_p1_num(self, p1_input):
-    global p1_selection 
-    p1_selection = p1_input
-    print_current_state()
 
 class P1GuessSum(Screen):
-  def store_p1_sum(self, p1_input):
-    global p1_sum_selection
-    p1_sum_selection = p1_input
-    print_current_state()
-
-class GiveToP2(Screen):
-  pass
-
-class Player2Selector(Screen):
-  def store_p2_num(self, p2_input):
-    global p2_selection
-    p2_selection = p2_input
-    print_current_state()
-
-<<<<<<< Updated upstream
-class ChosenNumber(Screen):
   pass
 
 class P2GuessSum(Screen):
   pass
 
-class WindowManager(ScreenManager):
+class GiveToP2(Screen):
   pass
 
-def print_current_state():
-=======
-  def store_p2_sum(self, p2_input):
+class Player2Selector(Screen):
+  pass
+
+class Player1Win(Screen):
+  pass
+
+class Player2Win(Screen):
+  pass
+
+class ChosenNumber(Screen):
+  chosen_number_label = ObjectProperty(None)
+  sum = ObjectProperty(None)
+  def on_enter(self, *args):
+    global p1_selection, p2_selection, p1_sum_selection
+    total = p1_selection + p2_selection
+    self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)}"
+    self.sum.text = f"The Sum is: {str(total)}"
+
+class P2GuessSum(Screen):
+  pass
+
+#############################################
+# GAME LOGIC (app.root class)
+#############################################
+class Game(ScreenManager):
+  def store_p1_num(self, p1_input):
+    global p1_selection 
+    p1_selection = p1_input
+    print_current_state()
+
+  def store_p1_sum(self, p1_input):
+    global p1_sum_selection
+    p1_sum_selection = p1_input
+    print_current_state()
+
+  def store_p2_num(self, p2_input):
     global p2_selection
     p2_selection = p2_input
     print_current_state()
+
+  def store_p2_sum(self, p2_input):
+    pass
 
   def check_sum():
     pass
@@ -121,16 +128,18 @@ g.add_widget(GiveToP1(name='give_to_p1'))
 # HELPER METHODS
 #############################################
 def print_current_state(): # debugging only
->>>>>>> Stashed changes
   print(f"P1 choice: {p1_selection}")
   print(f"P1 sum: {p1_sum_selection}")
   print(f"P2 choice: {p2_selection}")
   print(f"P2 sum: {p2_sum_selection}")
 
-kv = Builder.load_file("main.kv") 
+
+#############################################
+# STANDARD CODE
+#############################################
 class Main(App):
   def build(self):
-    return kv
+    return g
 
 if __name__ == "__main__":
   Main().run()
