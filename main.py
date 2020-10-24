@@ -43,6 +43,9 @@ class P1GuessSum(Screen):
 class P2GuessSum(Screen):
   pass
 
+class GiveToP1(Screen):
+  pass
+
 class GiveToP2(Screen):
   pass
 
