@@ -58,7 +58,7 @@ class GiveToP1(Screen):
 class GiveToP2(Screen):
   pass
 
-class DisplayResults1(Screen): # needs more game_logic to determine if p1 wins
+class DisplayResults1(Screen):
   chosen_number_label = ObjectProperty(None)
   sum = ObjectProperty(None)
   def on_enter(self, *args):
@@ -67,7 +67,7 @@ class DisplayResults1(Screen): # needs more game_logic to determine if p1 wins
     self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)}"
     self.sum.text = f"The Sum is: {str(total)}"
 
-class DisplayResults2(Screen): # needs more game_logic to determine if p2 wins
+class DisplayResults2(Screen):
   pass
 
 class P1Win(Screen):
@@ -98,11 +98,12 @@ class Game(ScreenManager):
   def store_p2_sum(self, p2_input):
     pass
 
-  def test_game_logic(self): # this logic may be moved to DisplayResults1
+  def did_p1_win(self):
+    global p1_selection, p2_selection, p1_sum_selection
     if (p1_selection + p2_selection == p1_sum_selection):
       self.current = 'p1_win'
     else:
-      self.current = 'p2_win'
+      self.current = 'p2_num_2'
 
 
 #############################################
@@ -131,10 +132,7 @@ g.add_widget(P2Win(name='p2_win'))
 # HELPER METHODS
 #############################################
 def print_current_state(): # debugging only
-  print(f"P1 choice: {p1_selection}")
-  print(f"P1 sum: {p1_sum_selection}")
-  print(f"P2 choice: {p2_selection}")
-  print(f"P2 sum: {p2_sum_selection}")
+  print(f"P1 choice: {p1_selection}, P1 sum: {p1_sum_selection}, P2 choice: {p2_selection}, P2 sum: {p2_sum_selection}")
 
 
 #############################################
