@@ -6,6 +6,7 @@ from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
+from kivy.graphics import Color, Rectangle
 
 #############################################
 # KV FILE(S)
