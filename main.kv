@@ -68,9 +68,43 @@
 		        app.root.current = "display_results_1"
 
 <P1Num2> 
-    # needs labels and btns
+    GridLayout:
+        cols:1
+        Label:
+            text: "P1, select your number"
+
+        GridLayout:
+            cols:3
+            Button:
+                text: "0"
+                on_release:
+                    app.root.store_p1_num(0)
+                    app.root.current = "display_results_2"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "5"
+                on_release:
+                    app.root.store_p1_num(5)
+                    app.root.current = "display_results_2"
+                    root.manager.transition.direction = "left"
+
 <P2Num2> 
-    # needs labels and btns
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "P2, Select Number"
+        
+        Button:
+            text: "0"
+            on_release:
+                app.root.store_p2_num(0)
+		        app.root.current = "p2_sum"
+        Button:
+            text: "5"
+            on_release:
+                app.root.store_p2_num(5)
+		        app.root.current = "p2_sum"
     
 <P1Sum>
     GridLayout:
@@ -110,7 +144,7 @@
         cols:1
     
         Label:
-            text: "P2 Guess the Sum"
+            text: "P2, guess the sum"
     
         Button:
             text: "0"
@@ -142,7 +176,7 @@
         Button: 
             text: "Next"  
             on_release:
-                app.root.current = "p1_guess_num"
+                app.root.current = "p1_num_2"
                 root.manager.transition.direction = "left"
 
 <GiveToP2>
@@ -179,7 +213,24 @@
                 app.root.did_p1_win()
 
 <DisplayResults2> 
-    # needs labels and btns
+    chosen_number_label:chosen_number_label
+    sum: sum
+
+    GridLayout:
+        cols:1
+
+        Label:
+            id: chosen_number_label
+            text: "Numbers chosen: "
+        
+        Label:
+            id: sum
+            text:""
+
+        Button:
+            text: "Next"
+            on_release:
+                app.root.did_p2_win()
 
 <P1Win>
     GridLayout:

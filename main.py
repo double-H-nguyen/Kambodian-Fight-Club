@@ -61,14 +61,22 @@ class GiveToP2(Screen):
 class DisplayResults1(Screen):
   chosen_number_label = ObjectProperty(None)
   sum = ObjectProperty(None)
+
   def on_enter(self, *args):
     global p1_selection, p2_selection, p1_sum_selection
     total = p1_selection + p2_selection
-    self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)}"
-    self.sum.text = f"The Sum is: {str(total)}"
+    self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)} \n P1 guessed that the sum is: {p1_sum_selection}"
+    self.sum.text = f"The sum is: {str(total)}"
 
 class DisplayResults2(Screen):
-  pass
+  chosen_number_label = ObjectProperty(None)
+  sum = ObjectProperty(None)
+
+  def on_enter(self, *args):
+    global p1_selection, p2_selection, p2_sum_selection
+    total = p1_selection + p2_selection
+    self.chosen_number_label.text = f"Numbers chosen: P1={str(p1_selection)} P2={str(p2_selection)} \n P2 guessed that the sum is: {p2_sum_selection}"
+    self.sum.text = f"The sum is: {str(total)}"
 
 class P1Win(Screen):
   pass
@@ -85,18 +93,20 @@ class Game(ScreenManager):
     p1_selection = p1_input
     print_current_state()
 
-  def store_p1_sum(self, p1_input):
-    global p1_sum_selection
-    p1_sum_selection = p1_input
-    print_current_state()
-
   def store_p2_num(self, p2_input):
     global p2_selection
     p2_selection = p2_input
     print_current_state()
 
+  def store_p1_sum(self, p1_input):
+    global p1_sum_selection
+    p1_sum_selection = p1_input
+    print_current_state()
+
   def store_p2_sum(self, p2_input):
-    pass
+    global p2_sum_selection
+    p2_sum_selection = p2_input
+    print_current_state()
 
   def did_p1_win(self):
     global p1_selection, p2_selection, p1_sum_selection
@@ -104,6 +114,13 @@ class Game(ScreenManager):
       self.current = 'p1_win'
     else:
       self.current = 'p2_num_2'
+
+  def did_p2_win(self):
+    global p1_selection, p2_selection, p2_sum_selection
+    if (p1_selection + p2_selection == p2_sum_selection):
+      self.current = 'p2_win'
+    else:
+      self.current = 'p1_num_1'
 
 
 #############################################
